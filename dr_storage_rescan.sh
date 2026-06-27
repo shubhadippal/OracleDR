@@ -11,9 +11,6 @@ set -euo pipefail
 
 LOGFILE="/var/log/dr_storage_rescan.log"
 
-GRID_HOME="/u01/app/19c/gridhome_1"
-ORACLE_SID="+ASM"
-
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOGFILE"
 }
@@ -87,8 +84,6 @@ multipath -ll | tee -a "$LOGFILE"
 log "Mounting ASM disk groups..."
 
 su - grid -c "
-export ORACLE_HOME=$GRID_HOME
-export ORACLE_SID=$ORACLE_SID
 export PATH=\$ORACLE_HOME/bin:\$PATH
 
 sqlplus -s / as sysasm <<EOF
