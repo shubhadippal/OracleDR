@@ -30,8 +30,9 @@ log "========================================================="
 
 DB_STATUS=$(su - oracle -c "srvctl status database -d oracledr 2>/dev/null")
 
-if echo "$DB_STATUS" | grep -qi "running"; then
-    log "ERROR: Database is still running."
+DB_STATUS=$(su - oracle -c "srvctl status database -d oracledr 2>/dev/null")
+
+if echo "$DB_STATUS" | grep -q "is running"; then
     log "Stop the database before dismounting ASM disk groups."
     echo "$DB_STATUS" | tee -a "$LOGFILE"
     exit 1
