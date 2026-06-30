@@ -21,6 +21,8 @@ BEGIN
               v_site := 'PROD';
           ELSIF LOWER(v_host) LIKE 'dr-%' THEN
               v_site := 'DR';
+          ELSIF LOWER(v_host) LIKE 'dev-%' THEN
+              v_site := 'DEV';
           ELSE
               v_site := 'UNKNOWN';
           END IF;
